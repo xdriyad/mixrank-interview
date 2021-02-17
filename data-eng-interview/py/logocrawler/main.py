@@ -36,7 +36,7 @@ class Parser(scrapy.Spider):
         else:
             root_url = res_url.split("/")[parts - 1]
 
-        brand = root_url.split('.')[1]
+        brand = str(response.url).split('.')[1]
         img_url_list = []
 
         flag = False
@@ -91,10 +91,9 @@ class Parser(scrapy.Spider):
         # Find Favicons from the page
         favicon_url = ''
         for link in response.xpath('//link'):
-            link_rel = str(link.xpath('@rel').extract().lower().strip())
             link_href = str(link.xpath('@href').extract())
             link_href = self.clean_url(link_href)
-            if link_href.find('ico') > 0 or link_rel.find('icon') >0:
+            if link_href.find('ico') > 0:
                 favicon_url = link_href
                 break
 
@@ -118,11 +117,11 @@ class Parser(scrapy.Spider):
         favicon_recall = tf / (tf + (ls - lr))  # TruePositives / (TruePositives + FalseNegatives)
 
         l1 = str ('>>>>RESULT<<<<')
-        l2 = str ('Response Found: ', lr, 'Logo Found: ', tl, 'Favicon Found: ', tf, 'Request Failed: ', ls-lr)
-        l3 = str ('Logo', 'Precision', logo_precision, 'Recall: ', logo_recall)
-        l4 = str ('Favicon', 'Precision', favicon_precision, 'Recall: ', favicon_recall)
+        l2 = str ('Response Found: ' + str(lr)+ ' Logo Found: '+ str(tl) + ' Favicon Found: '+ str(tf)+ ' Request Failed: '+ str(ls-lr))
+        l3 = str ('Logo ->' + ' Precision: ' + str(logo_precision) + ' Recall: '+ str(logo_recall))
+        l4 = str ('Favicon->' + ' Precision: ' + str(favicon_precision)+ ' Recall: '+ str(favicon_recall))
 
-        with open('summery.txt','r') as file:
+        with open('summery.txt','w') as file:
             file.write(l1 +'\n')
             file.write(l2 + '\n')
             file.write(l3 + '\n')

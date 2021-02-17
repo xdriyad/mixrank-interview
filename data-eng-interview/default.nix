@@ -10,8 +10,11 @@ pkgs.mkShell rec {
         (pkgs.python3.buildEnv.override {
             ignoreCollisions = true;
             extraLibs = with pkgs.python3.pkgs; [
-                ipython
-                nose
+                scrapy
+                beautifulsoup4
+                pandas
+                requests
+                lxml
             ];
         })
     ]);
