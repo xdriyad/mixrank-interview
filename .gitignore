@@ -127,3 +127,7 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+result.csv
+result2.csv
+summery.txt
+summery2.txt

@@ -110,10 +110,10 @@ class Parser(scrapy.Spider):
         tl = len([x for x in list(res['logo']) if x != 0])
         tf = len([x for x in list(res['favicon']) if x != 0])
 
-        logo_precision = (tl / lr) * 100  # TruePositives / (TruePositives + FalsePositives)
+        logo_precision = (tl / lr)   # TruePositives / (TruePositives + FalsePositives)
         logo_recall = tl / (tl + (ls - lr))  # TruePositives / (TruePositives + FalseNegatives)
 
-        favicon_precision = (tf / lr) * 100  # TruePositives / (TruePositives + FalsePositives)
+        favicon_precision = (tf / lr)   # TruePositives / (TruePositives + FalsePositives)
         favicon_recall = tf / (tf + (ls - lr))  # TruePositives / (TruePositives + FalseNegatives)
 
         l1 = str ('>>>>RESULT<<<<')

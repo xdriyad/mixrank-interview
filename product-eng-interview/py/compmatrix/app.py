@@ -16,9 +16,7 @@ Sdk = Base.classes.sdk
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    options = {}
-    for a in db.session.query(Sdk).all():
-        options[a.id] = a.name
+
     return render_template('index.html', options=db.session.query(Sdk).all())
 
 
@@ -59,7 +57,7 @@ def data():
 
     for id in options:
         k[id] = 0
-        other_entries = app_sdk.filter(AppSdk.sdk_id != int(id))    # Eleminating given options
+        other_entries = app_sdk.filter(AppSdk.sdk_id != int(id))    # Eliminating given options
 
     k['none'] = other_entries.count()
     not_installed = other_entries.filter(AppSdk.installed == 0).all()
@@ -92,7 +90,6 @@ def data():
             })
         res['categories'].append(name)
 
-    print(res)
     return jsonify(res)
 
 
