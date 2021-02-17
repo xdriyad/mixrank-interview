@@ -76,8 +76,5 @@ with open('summery2.txt','w') as file:
 
 print (l1)
 print (l2)
-
-print (l1)
-print (l2)
 print (l3)
 print (l4)
